@@ -1,7 +1,7 @@
 # VBA Obfuscator
 VBA Macro obfuscator
 
-Requires ANTLR4 Runtime library 4.8
+Requires ANTLR4 Runtime library 4.8: https://www.antlr.org/download/antlr-runtime-4.8.jar
 
 Uses ANTLR to parse a VBA file and obtain an Abstract Syntax Tree that describes the program. Then walks the tree and changes nodes acording to certain 'morphs', i.e. randomize variables names, encode literals, add useless code, etc.
 
