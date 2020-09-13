@@ -5,6 +5,8 @@ Requires ANTLR4 Runtime library 4.8: https://www.antlr.org/download/antlr-runtim
 
 Uses ANTLR to parse a VBA file and obtain an Abstract Syntax Tree that describes the program. Then walks the tree and changes nodes acording to certain 'morphs', i.e. randomize variables names, encode literals, add useless code, etc.
 
+#### Input
+
 ```
 Sub Something()
 
@@ -19,6 +21,7 @@ Sub SomethingElse()
     A = True
 End Sub
 ```
+#### Output
 ```
 Sub wzfhyfougl()
 Dim oaoqnbxjnf as Integer
