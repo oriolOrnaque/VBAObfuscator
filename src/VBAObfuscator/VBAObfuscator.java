@@ -1,6 +1,7 @@
 package VBAObfuscator;
 
 import VBAObfuscator.Morphs.IDMorph.IDMorph;
+import VBAObfuscator.Morphs.LiteralEncoderMorph.LiteralEncoderMorph;
 import VBAObfuscator.Morphs.Morph;
 import VBAObfuscator.Morphs.UselessCodeMorph.UselessCodeMorph;
 import VBAObfuscator.parser.vbaLexer;
@@ -27,6 +28,7 @@ public class VBAObfuscator {
     {
         this.morphs = new LinkedList<>();
         this.morphs.add(new UselessCodeMorph());
+        this.morphs.add(new LiteralEncoderMorph());
         this.morphs.add(new IDMorph());
     }
 

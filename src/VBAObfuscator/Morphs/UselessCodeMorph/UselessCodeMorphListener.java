@@ -21,6 +21,12 @@ public class UselessCodeMorphListener extends MorphListener {
     public void enterModuleBody(vbaParser.ModuleBodyContext ctx) {
         List<vbaParser.ModuleBodyElementContext> moduleElements = ctx.moduleBodyElement();
 
-        rewriter.insertBefore(moduleElements.get(0).getStart(), gen.generateUselessSub());
+        for(vbaParser.ModuleBodyElementContext ele: moduleElements)
+        {
+            rewriter.insertBefore(ele.getStart(), gen.generateUselessSub());
+            rewriter.insertAfter(ele.getStop(), gen.generateUselessSub());
+        }
+
+        //rewriter.insertBefore(moduleElements.get(0).getStart(), gen.generateUselessSub());
     }
 }
