@@ -1,12 +1,12 @@
-Sub rdelggypis()
+Sub Something()
 
-Dim abgmizmbcw As Integer
-abgmizmbcw = 100
-MsgBox abgmizmbcw
+Dim A As Integer
+A = 100
+MsgBox A
 
 End Sub
 
-Sub virfbedplj()
-    Dim swlzdwpkrj As Boolean
-    swlzdwpkrj = True
+Sub SomethingElse()
+    Dim A As Boolean
+    A = True
 End Sub

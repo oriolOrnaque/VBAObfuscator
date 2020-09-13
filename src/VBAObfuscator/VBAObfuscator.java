@@ -2,10 +2,12 @@ package VBAObfuscator;
 
 import VBAObfuscator.Morphs.IDMorph.IDMorph;
 import VBAObfuscator.Morphs.Morph;
+import VBAObfuscator.Morphs.UselessCodeMorph.UselessCodeMorph;
 import VBAObfuscator.parser.vbaLexer;
 import VBAObfuscator.parser.vbaParser;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.io.BufferedWriter;
@@ -15,6 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
+import static org.antlr.v4.runtime.CharStreams.fromString;
 
 public class VBAObfuscator {
 
@@ -23,37 +26,48 @@ public class VBAObfuscator {
     public VBAObfuscator()
     {
         this.morphs = new LinkedList<>();
+        this.morphs.add(new UselessCodeMorph());
         this.morphs.add(new IDMorph());
     }
 
     public void obfuscate(String src)
     {
-        boolean firstRead = false;
-
-        for(Morph morph: morphs)
+        try
         {
-            System.out.println("Applying morph: " + morph.getDescription());
-            try {
-                CharStream cs = fromFileName(src);
+            CharStream cs = fromFileName(src);
+            boolean firstRead = true;
+            String source = "";
+
+            for(Morph morph: morphs)
+            {
+                System.out.println("Applying morph: " + morph.getDescription());
+                if(!firstRead)
+                    cs = fromString(source);
 
                 vbaLexer lexer = new vbaLexer(cs);
                 CommonTokenStream tokens = new CommonTokenStream(lexer);
+
                 vbaParser parser = new vbaParser(tokens);
-                ParseTree root = parser.startRule();
+                ParseTree tree = parser.startRule();
 
-                String morphed = morph.morph(root, tokens);
+                source = morph.morph(tree, tokens);
 
-                BufferedWriter writer = new BufferedWriter(new FileWriter(src));
-                writer.write(morphed);
-                writer.close();
+                firstRead = false;
             }
-            catch(IOException e)
-            {
-                System.out.println("Exception");
-                System.out.println(e.getMessage());
-                e.printStackTrace();
-            }
+
+            String[] splits = src.split("\\.");
+            String output = splits[0].concat("_obfuscated.").concat(splits[1]);
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(output));
+            writer.write(source);
+            writer.close();
         }
+        catch(IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
+
+
         System.out.println("Obfuscation terminated");
     }
 

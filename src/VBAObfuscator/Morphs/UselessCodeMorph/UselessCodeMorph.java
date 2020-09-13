@@ -1,20 +1,19 @@
-package VBAObfuscator.Morphs.IDMorph;
+package VBAObfuscator.Morphs.UselessCodeMorph;
 
 import VBAObfuscator.Morphs.Morph;
 import org.antlr.v4.runtime.CommonTokenStream;
-import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 
-public class IDMorph implements Morph {
+public class UselessCodeMorph implements Morph {
 
     public String morph(ParseTree program, CommonTokenStream tokens)
     {
         TokenStreamRewriter rewriter = new TokenStreamRewriter(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
 
-        IDMorphListener morph = new IDMorphListener(rewriter);
+        UselessCodeMorphListener morph = new UselessCodeMorphListener(rewriter);
 
         walker.walk(morph, program);
 
@@ -23,7 +22,6 @@ public class IDMorph implements Morph {
 
     public String getDescription()
     {
-        return "renaming variables and functions identifiers for random strings";
+        return "adds useless code to distract";
     }
-
 }
