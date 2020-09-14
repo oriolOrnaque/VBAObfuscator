@@ -10,6 +10,7 @@ public class CodeGenerator {
         sub += generateRandomIdentifier() + "()\n";
         String var1 = generateRandomIdentifier();
         sub += "Dim " + var1 + " as Integer\n" + var1 + " = " + generateRandomInteger() + "\n";
+        sub += "MsgBox " + var1 + "\n";
         sub += "End Sub\n";
         return sub;
     }

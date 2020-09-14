@@ -1,7 +1,7 @@
 Sub Something()
 
 Dim A As Integer
-A = 100 + 3
+A = 100
 MsgBox A
 
 End Sub
