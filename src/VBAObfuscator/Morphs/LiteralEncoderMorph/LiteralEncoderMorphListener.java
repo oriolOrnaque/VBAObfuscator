@@ -5,12 +5,34 @@ import VBAObfuscator.parser.vbaParser;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.math.BigInteger;
+import java.util.List;
 import java.util.Random;
 
 public class LiteralEncoderMorphListener extends MorphListener {
 
+    // https://www.vbforums.com/showthread.php?466942-Hex-and-String-Conversions
+    private static String vbaHex2Str = "\nPublic Function HexToString(ByVal HexToStr As String) As String\n" +
+            "Dim strTemp   As String\n" +
+            "Dim strReturn As String\n" +
+            "Dim I         As Long\n" +
+            "    For I = 1 To Len(HexToStr) Step 2\n" +
+            "        strTemp = Chr$(Val(\"&H\" & Mid$(HexToStr, I, 2)))\n" +
+            "        strReturn = strReturn & strTemp\n" +
+            "    Next I\n" +
+            "    HexToString = strReturn\n" +
+            "End Function\n";
+
     public LiteralEncoderMorphListener(TokenStreamRewriter rewriter) {
         super(rewriter);
+    }
+
+    @Override
+    public void enterModuleBody(vbaParser.ModuleBodyContext ctx) {
+        List<vbaParser.ModuleBodyElementContext> moduleElements = ctx.moduleBodyElement();
+
+        Random r = new Random();
+        rewriter.insertAfter(moduleElements.get(r.nextInt(moduleElements.size())).getStop(), vbaHex2Str);
     }
 
     @Override
@@ -18,9 +40,9 @@ public class LiteralEncoderMorphListener extends MorphListener {
         if(ctx.literal().SHORTLITERAL() != null)
             replaceShortLiteral(ctx.literal().getToken(vbaParser.SHORTLITERAL, 0));
         else if(ctx.literal().FALSE() != null)
-            replaceFalseLiteral(ctx.literal().getToken(vbaParser.FALSE, 0));
+            replaceBooleanLiteral(ctx.literal().getToken(vbaParser.FALSE, 0));
         else if(ctx.literal().TRUE() != null)
-            replaceTrueLiteral(ctx.literal().getToken(vbaParser.TRUE, 0));
+            replaceBooleanLiteral(ctx.literal().getToken(vbaParser.TRUE, 0));
         else if(ctx.literal().STRINGLITERAL() != null)
             replaceStringLiteral(ctx.literal().getToken(vbaParser.STRINGLITERAL, 0));
     }
@@ -31,21 +53,16 @@ public class LiteralEncoderMorphListener extends MorphListener {
         rewriter.replace(shortLiteral.getSymbol(), encodeShort(n));
     }
 
-    private void replaceFalseLiteral(TerminalNode falseLiteral)
+    private void replaceBooleanLiteral(TerminalNode booleanLiteral)
     {
-        boolean b = Boolean.parseBoolean(falseLiteral.getText());
-        rewriter.replace(falseLiteral.getSymbol(), encodeBoolean(b));
-    }
-
-    private void replaceTrueLiteral(TerminalNode trueLiteral)
-    {
-        boolean b = Boolean.parseBoolean(trueLiteral.getText());
-        rewriter.replace(trueLiteral.getSymbol(), encodeBoolean(b));
+        boolean b = Boolean.parseBoolean(booleanLiteral.getText());
+        rewriter.replace(booleanLiteral.getSymbol(), encodeBoolean(b));
     }
 
     private void replaceStringLiteral(TerminalNode stringLiteral)
     {
-
+        String hex = String.format("%x", new BigInteger(1, stringLiteral.getText().getBytes()));
+        rewriter.replace(stringLiteral.getSymbol(), "HexToString(\"" + hex + "\")");
     }
 
     private String encodeBoolean(boolean b)

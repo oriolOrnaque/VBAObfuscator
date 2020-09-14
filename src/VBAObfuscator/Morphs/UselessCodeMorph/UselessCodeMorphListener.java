@@ -26,7 +26,5 @@ public class UselessCodeMorphListener extends MorphListener {
             rewriter.insertBefore(ele.getStart(), gen.generateUselessSub());
             rewriter.insertAfter(ele.getStop(), gen.generateUselessSub());
         }
-
-        //rewriter.insertBefore(moduleElements.get(0).getStart(), gen.generateUselessSub());
     }
 }

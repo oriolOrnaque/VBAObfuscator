@@ -704,6 +704,8 @@ ambiguousKeyword :
 	VARIANT | VERSION |
 	WEND | WHILE | WIDTH | WITH | WITHEVENTS | WRITE |
 	XOR
+	// added for the obfuscator
+	| CHR | VAL
 ;
 
 remComment : REMCOMMENT;
@@ -896,6 +898,9 @@ WITH : W I T H;
 WITHEVENTS : W I T H E V E N T S;
 WRITE : W R I T E;
 XOR : X O R;
+// added for the obfuscator
+CHR : C H R;
+VAL : V A L;
 
 
 // symbols

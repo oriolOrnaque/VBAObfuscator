@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.TokenStreamRewriter;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import java.util.List;
 import java.util.Random;
 
 public class IDMorphListener extends MorphListener {
@@ -46,6 +47,32 @@ public class IDMorphListener extends MorphListener {
         this.scope.popLevel();
     }
 
+    @Override public void enterFunctionStmt(vbaParser.FunctionStmtContext ctx)
+    {
+        TerminalNode terminalNode = ctx.ambiguousIdentifier().getToken(vbaParser.IDENTIFIER, 0);
+        Token token = terminalNode.getSymbol();
+
+        replaceID(token);
+
+        this.scope.pushLevel();
+
+        for(vbaParser.ArgContext arg: ctx.argList().arg())
+        {
+            replaceID(arg.ambiguousIdentifier().getToken(vbaParser.IDENTIFIER, 0).getSymbol());
+        }
+    }
+
+    @Override public void exitFunctionStmt(vbaParser.FunctionStmtContext ctx)
+    {
+        this.scope.popLevel();
+    }
+
+    @Override public void enterForNextStmt(vbaParser.ForNextStmtContext ctx)
+    {
+        for(vbaParser.AmbiguousIdentifierContext id: ctx.ambiguousIdentifier())
+            replaceID(id.getToken(vbaParser.IDENTIFIER, 0).getSymbol());
+    }
+
     @Override public void enterVariableSubStmt(vbaParser.VariableSubStmtContext ctx)
     {
         TerminalNode terminalNode = ctx.ambiguousIdentifier().getToken(vbaParser.IDENTIFIER, 0);
@@ -56,10 +83,13 @@ public class IDMorphListener extends MorphListener {
 
     @Override public void enterICS_S_VariableOrProcedureCall(vbaParser.ICS_S_VariableOrProcedureCallContext ctx)
     {
-        TerminalNode terminalNode = ctx.ambiguousIdentifier().getToken(vbaParser.IDENTIFIER, 0);
-        Token token = terminalNode.getSymbol();
+        if(ctx.ambiguousIdentifier().ambiguousKeyword(0) == null)
+        {
+            TerminalNode terminalNode = ctx.ambiguousIdentifier().getToken(vbaParser.IDENTIFIER, 0);
+            Token token = terminalNode.getSymbol();
 
-        replaceID(token);
+            replaceID(token);
+        }
     }
 
     private void replaceID(Token token)
