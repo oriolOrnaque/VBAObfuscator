@@ -67,13 +67,63 @@ public class LiteralEncoderMorphListener extends MorphListener {
 
     private String encodeBoolean(boolean b)
     {
+        return encodeBoolean(b, 0);
+    }
+
+    private String encodeBoolean(boolean b, int rec_lvl)
+    {
+        if(rec_lvl == 6)    /* base case */
+        {
+            if(b)
+                return "True";
+            else
+                return "False";
+        }
+
         StringBuilder builder = new StringBuilder();
+        builder.append("(");
 
-        if(!b)
-            builder.append("((True And (False Or (False Or ((True) Xor ((True)) Xor Not (False Xor Not True)))) And (False Xor Not True)))");
+        Random r = new Random();
+        int sel = r.nextInt(7);
+        if(b)
+        {
+            switch (sel) {
+                /* true & true */
+                case 0 -> builder.append(encodeBoolean(true, rec_lvl + 1)).append(" And ").append(encodeBoolean(true, rec_lvl + 1));
+                /* false | true */
+                case 1 -> builder.append(encodeBoolean(false, rec_lvl + 1)).append(" Or ").append(encodeBoolean(true, rec_lvl + 1));
+                /* true | false */
+                case 2 -> builder.append(encodeBoolean(true, rec_lvl + 1)).append(" Or ").append(encodeBoolean(false, rec_lvl + 1));
+                /* true | true */
+                case 3 -> builder.append(encodeBoolean(true, rec_lvl + 1)).append(" Or ").append(encodeBoolean(true, rec_lvl + 1));
+                /* !false */
+                case 4 -> builder.append("Not ").append(encodeBoolean(false, rec_lvl + 1));
+                /* false ^ true */
+                case 5 -> builder.append(encodeBoolean(false, rec_lvl + 1)).append(" Xor ").append(encodeBoolean(true, rec_lvl + 1));
+                /* true ^ false */
+                case 6 -> builder.append(encodeBoolean(true, rec_lvl + 1)).append(" Xor ").append(encodeBoolean(false, rec_lvl + 1));
+            }
+        }
         else
-            builder.append("True And False Or False Or True Xor (True Xor Not False Xor Not True) And False Xor Not True");
-
+        {
+            switch (sel) {
+                /* true & false */
+                case 0 -> builder.append(encodeBoolean(true, rec_lvl + 1)).append(" And ").append(encodeBoolean(false, rec_lvl + 1));
+                /* false & true */
+                case 1 -> builder.append(encodeBoolean(false, rec_lvl + 1)).append(" And ").append(encodeBoolean(true, rec_lvl + 1));
+                /* false & false */
+                case 2 -> builder.append(encodeBoolean(false, rec_lvl + 1)).append(" And ").append(encodeBoolean(false, rec_lvl + 1));
+                /* false | false */
+                case 3 -> builder.append(encodeBoolean(false, rec_lvl + 1)).append(" Or ").append(encodeBoolean(false, rec_lvl + 1));
+                /* !true */
+                case 4 -> builder.append("Not ").append(encodeBoolean(true, rec_lvl + 1));
+                /* false ^ false */
+                case 5 -> builder.append(encodeBoolean(false, rec_lvl + 1)).append(" Xor ").append(encodeBoolean(false, rec_lvl + 1));
+                /* true ^ true */
+                case 6 -> builder.append(encodeBoolean(true, rec_lvl + 1)).append(" Xor ").append(encodeBoolean(true, rec_lvl + 1));
+            }
+        }
+        builder.append(")");
         return builder.toString();
     }
 
