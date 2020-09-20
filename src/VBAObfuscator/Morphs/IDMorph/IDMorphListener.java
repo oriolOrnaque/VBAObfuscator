@@ -20,10 +20,19 @@ public class IDMorphListener extends MorphListener {
         super(rewriter);
 
         this.scope = new Scope();
+        this.scope.pushLevel();
         this.gen = new CodeGenerator();
     }
 
-    @Override public void enterModule(vbaParser.ModuleContext ctx)
+    public IDMorphListener(TokenStreamRewriter rewriter, Scope scope)
+    {
+        super(rewriter);
+
+        this.scope = scope;
+        this.gen = new CodeGenerator();
+    }
+
+    /*@Override public void enterModule(vbaParser.ModuleContext ctx)
     {
         this.scope.pushLevel();
     }
@@ -31,7 +40,7 @@ public class IDMorphListener extends MorphListener {
     @Override public void exitModule(vbaParser.ModuleContext ctx)
     {
         this.scope.popLevel();
-    }
+    }*/
 
     @Override public void enterSubStmt(vbaParser.SubStmtContext ctx) {
         TerminalNode terminalNode = ctx.ambiguousIdentifier().getToken(vbaParser.IDENTIFIER, 0);
@@ -96,7 +105,9 @@ public class IDMorphListener extends MorphListener {
     {
         String qwe = this.gen.generateRandomIdentifier();
         if(this.scope.inScope(token.getText()))
+        {
             qwe = this.scope.get(token.getText());
+        }
         else
             this.scope.insert(token.getText(), qwe);
 

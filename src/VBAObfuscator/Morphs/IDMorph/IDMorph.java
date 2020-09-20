@@ -14,9 +14,15 @@ public class IDMorph implements Morph {
         TokenStreamRewriter rewriter = new TokenStreamRewriter(tokens);
         ParseTreeWalker walker = new ParseTreeWalker();
 
-        IDMorphListener morph = new IDMorphListener(rewriter);
+        Scope scope = new Scope();
 
-        walker.walk(morph, program);
+        /* Collect global identifiers so the order of declaration doesnt matter on the second pass */
+        GlobalsListener firstMorph = new GlobalsListener(rewriter, scope);
+        walker.walk(firstMorph, program);
+
+        /* second pass */
+        IDMorphListener secondMorph = new IDMorphListener(rewriter, scope);
+        walker.walk(secondMorph, program);
 
         return rewriter.getText();
     }

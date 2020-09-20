@@ -1,64 +1,64 @@
 
-Sub lngnntvcrq()
-Dim polmyisjrc as Integer
-polmyisjrc = 0 - 637 - 10006 - 149 - 905 - 225 - 121 - 29 - 81 - 10 - 2 - 0 - 1
-MsgBox polmyisjrc
+Sub qxgsimknfa()
+Dim hjqdfzxgly as Integer
+hjqdfzxgly = 0 - 6254 - 224 - 55 - 62 - 60 - 11 - 2 - 0 - 1
+MsgBox hjqdfzxgly
 End Sub
-Sub wmtxgiurjl()
+Sub gwogeznbid()
 
-Dim rumabuhlhm As Integer
-rumabuhlhm = 0 + 21 + 19 + 49 + 0 + 4 + 5 + 2
-MsgBox rumabuhlhm
+Dim hpdqnzwdrc As Integer
+hpdqnzwdrc = 0 + 21 + 39 + 32 + 6 + 1 + 0 + 1
+MsgBox hpdqnzwdrc
 
 End Sub
-Sub otfthddpji()
-Dim oubjqwmmcb as Integer
-oubjqwmmcb = 0 - 8647 - 12781 - 5730 - 168 - 28 - 25 - 13 - 20 - 7 - 7 - 4 - 1
-MsgBox oubjqwmmcb
-End Sub
-
-
-
-Sub jglmyjtidx()
-Dim hnxyzjflst as Integer
-hnxyzjflst = 0 + 12479 + 1348 + 11 + 169 + 0 + 1 + 4 + 4 + 0 + 0 + 2
-MsgBox hnxyzjflst
-End Sub
-Sub wmeglxxdcc()
-Dim aphcyuvhur As String
-aphcyuvhur = osuypjgujl("2248656c6c6f20776f726c6422")
-MsgBox aphcyuvhur
-End Sub
-Sub jdjarfoepa()
-Dim rcckgdxrmo as Integer
-rcckgdxrmo = 0 - 7253 - 9472 - 75 - 3083 - 2687 - 91 - 415 - 124 - 718 - 13 - 39 - 0 - 1 - 2 - 1
-MsgBox rcckgdxrmo
+Sub zkigfdhxjr()
+Dim nidslhsbco as Integer
+nidslhsbco = 0 - 2112 - 12060 - 5592 - 758 - 464 - 84 - 2 - 5
+MsgBox nidslhsbco
 End Sub
 
 
 
-Sub jucagwgvci()
-Dim gtvhkjchof as Integer
-gtvhkjchof = 0 + 17777 + 4404 + 861 + 8264 + 684 + 19 + 93 + 27 + 7 + 11 + 0 + 4
-MsgBox gtvhkjchof
+Sub vptaksnuca()
+Dim tsbfwwtaco as Integer
+tsbfwwtaco = 0 + 11147 + 2657 + 4773 + 1746 + 3831 + 832 + 181 + 101 + 13 + 205
+MsgBox tsbfwwtaco
 End Sub
-Sub nifudqwybh()
-    Dim urivmsvsgs As Boolean
-    urivmsvsgs = ((((Not ((True Or False) And (True And False))) Or (((True Xor True) Xor (False Xor True)) And ((False And True) And (Not False)))) Xor (((Not (False Or False)) Xor ((True And True) And (False Or True))) And ((Not (True Xor True)) And ((Not False) And (True Or False))))) Or (((((True And True) Xor (False Xor False)) Xor ((True Xor False) Or (True And False))) Xor (((False Or False) And (False And False)) Or ((True Or False) Or (Not True)))) And ((((True And False) Xor (False And True)) Xor ((False And True) Xor (False Xor True))) Xor (((Not False) Xor (False Xor False)) Or ((True Xor False) Or (True And True))))))
+Sub ffrvhiebgh()
+Dim xatbbhvmfa As String
+xatbbhvmfa = qakyjxlowy("2248656c6c6f20776f726c6422")
+MsgBox xatbbhvmfa
 End Sub
-Public Function jbhcjoqnob(ByVal wcqviddjbx As String) As String
-Dim fljaghfnbp   As String
-Dim sjtbedvmfw As String
-Dim xriwnokhpb         As Long
-    For xriwnokhpb = 1 To Len(wcqviddjbx) Step 2
-        fljaghfnbp = Chr$(Val("&H" & Mid$(wcqviddjbx, xriwnokhpb, 2)))
-        sjtbedvmfw = sjtbedvmfw & fljaghfnbp
-    Next xriwnokhpb
-    jbhcjoqnob = sjtbedvmfw
+Sub aaywxbfilu()
+Dim enpatzaeoi as Integer
+enpatzaeoi = 0 - 9156 - 1578 - 326 - 27 - 217 - 29 - 40 - 18
+MsgBox enpatzaeoi
+End Sub
+Public Function qakyjxlowy(ByVal luznneuskl As String) As String
+Dim sxzbipbglb   As String
+Dim eyrgjyayae As String
+Dim planxfjawg         As Long
+    For planxfjawg = 1 To Len(luznneuskl) Step 2
+        sxzbipbglb = Chr$(Val("&H" & Mid$(luznneuskl, planxfjawg, 2)))
+        eyrgjyayae = eyrgjyayae & sxzbipbglb
+    Next planxfjawg
+    qakyjxlowy = eyrgjyayae
 End Function
 
-Sub wsxqeazwtb()
-Dim lqnnbcghyc as Integer
-lqnnbcghyc = 0 + 25781 + 1724 + 146 + 37 + 4 + 13 + 20 + 13 + 5 + 2 + 1
-MsgBox lqnnbcghyc
+
+
+
+Sub gvixfhkafv()
+Dim ulpjmxpgay as Integer
+ulpjmxpgay = 0 + 450 + 9291 + 722 + 396 + 50 + 140 + 5 + 0 + 10 + 9 + 1
+MsgBox ulpjmxpgay
+End Sub
+Sub iptcuinysv()
+    Dim hzxoexpcqt As Boolean
+    hzxoexpcqt = (((((Not (False Xor False)) And ((False Xor False) Or (False Xor False))) Or (((False Xor True) Xor (False And False)) Or ((True And True) Xor (False Or False)))) Or ((((True Xor False) Or (True Or True)) Xor ((False Or True) Xor (True Xor False))) Xor ((Not (True Or False)) And ((Not False) Or (False And True))))) Or ((Not (((Not False) Xor (True Xor True)) Or (Not (False Xor True)))) Xor ((((False Or False) Xor (True And True)) Or ((True Or False) And (True Xor False))) Xor (Not ((False Or False) Or (False And False))))))
+End Sub
+Sub dnmnvsxbhl()
+Dim lesrscgots as Integer
+lesrscgots = 0 + 15555 + 1632 + 1489 + 2269 + 396 + 703 + 391 + 103 + 11 + 1 + 0 + 1 + 0 + 0 + 1
+MsgBox lesrscgots
 End Sub
